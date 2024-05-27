@@ -12,7 +12,9 @@ const ShowGraph = () => {
   const [data, setData] = useState([]);
 
   const getTestCounts = async (name, type, month) => {
-    const response = await fetch(`http://localhost:3000/users/get-user-monthly-test-data/${name}/${type}/${month}`);
+    const response = await fetch(
+      `http://localhost:3000/users/get-user-monthly-test-data/${name}/${type}/${month}`
+    );
     const data = await response.json();
     if (data.status) setData(data.data);
   };
@@ -43,7 +45,10 @@ const ShowGraph = () => {
         <Button
           variant="text"
           startIcon={<ArrowBackIcon />}
-          sx={{ color: "#4F6367", "&:hover": { backgroundColor: "transparent" } }}
+          sx={{
+            color: "#4F6367",
+            "&:hover": { backgroundColor: "transparent" },
+          }}
           disableRipple
           disableElevation
           onClick={() => navigate("/")}
@@ -63,12 +68,18 @@ const ShowGraph = () => {
         }}
       >
         <div style={{ textAlign: "center" }}>
-          <h1 style={{ fontFamily: "Poppins" }}>{search.split("-").join(" ").toUpperCase()}</h1>
+          <h1 style={{ fontFamily: "Poppins" }}>
+            {search.split("-").join(" ").toUpperCase()}
+          </h1>
           <h2 style={{ fontFamily: "Poppins" }}>{name.toUpperCase()}</h2>
         </div>
 
-        {search == "blood-pressure-level" && data.length && <BLoodPressureChart userData={data.slice(0, 4)} />}
-        {search == "blood-sugar-level" && data.length && <BloodSugarChart userData={data} />}
+        {search == "blood-pressure-level" && data.length && (
+          <BLoodPressureChart userData={data} />
+        )}
+        {search == "blood-sugar-level" && data.length && (
+          <BloodSugarChart userData={data} />
+        )}
       </div>
     </div>
   );
